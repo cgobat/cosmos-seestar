@@ -1,4 +1,4 @@
-name: Plugin Ruby Gem
+name: Build/Publish Ruby Gem
 
 on:
   workflow_dispatch:
@@ -17,6 +17,15 @@ jobs:
           ruby-version: '3.0'
           bundler-cache: false
 
+      - name: Set up registry credentials
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
+
       - name: Rake build
         run: |
           cd ${{ github.workspace }}/openc3-cosmos-seestar
@@ -26,7 +35,7 @@ jobs:
           echo "Built gem version $GEM_VERSION"
           ls -l *.gem
 
-      - name: Publish gem
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gem push ${{ github.workspace }}/openc3-cosmos-seestar/openc3-cosmos-seestar-$GEM_VERSION.gem --host https://rubygems.pkg.github.com/${{ github.repository_owner }}
+      - name: Publish gem to GitHub
+        run: |
+          cd ${{ github.workspace }}/openc3-cosmos-seestar
+          gem push --KEY github --host https://rubygems.pkg.github.com/${{ github.repository_owner }} openc3-cosmos-seestar-$GEM_VERSION.gem

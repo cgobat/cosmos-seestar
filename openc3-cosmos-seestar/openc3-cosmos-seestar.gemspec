@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.authors = ['Caden Gobat']
   s.email = ['36030084+cgobat@users.noreply.github.com']
-  s.homepage = 'https://github.com/cgobat/cosmos-seestar'
+  s.homepage = 'https://github.com/cgobat/openc3-cosmos-seestar'
   s.metadata = {
-      "github_repo" => "ssh://github.com/cgobat/cosmos-seestar"
+      "github_repo" => "ssh://github.com/cgobat/openc3-cosmos-seestar"
     }
   s.platform = Gem::Platform::RUBY
 
