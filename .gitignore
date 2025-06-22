@@ -3,6 +3,7 @@
 *.so
 *.bundle
 Makefile
+*.gem
 *Gemfile.lock
 .yardoc
 .DS_Store
@@ -15,6 +16,7 @@ openc3/*_unexpected.txt
 openc3/openc3/
 openc3/spec/install/outputs
 openc3/spec/examples.txt
+plugins/DEFAULT/*/plugin_instance.json
 coverage/
 profile/
 
