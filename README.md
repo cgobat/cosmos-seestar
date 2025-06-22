@@ -1,42 +1,29 @@
-# OpenC3 COSMOS Project
+# OpenC3 COSMOS Project/Plugin for Seestar S50
 
-This git repo is used as a starting point for running and configuring OpenC3 COSMOS for your specific project. It includes the necessary scripts to run OpenC3 COSMOS, but does not come with all the source code and relies on running released containers rather than building containers from source. This is the recommended starting place for any project who wants to use OpenC3 COSMOS, but not develop the core system.
+This repository contains a WIP [OpenC3 COSMOS](https://github.com/OpenC3/cosmos) project that can be used to interact with and control a [Seestar S50 telescope](https://www.seestar.com/).
 
 ## Quick Start
 
-1. git clone https://github.com/openc3/cosmos-project.git cosmos-myprojectname
-2. Checkout the version tag you want.
-   ```
-   git checkout v6.9.1
-   ```
-3. Start OpenC3 COSMOS
-   - On Linux/Mac: ./openc3.sh run
-   - On Windows: openc3.bat run
-4. After approximately 2 minutes, open a web browser to http://localhost:2900
-   - If you run "docker ps", you can watch until the openc3-cosmos-init container completes, at which point the system should be fully configured and ready to use.
+1. `git clone https://github.com/cgobat/openc3-cosmos-seestar.git`
+2. Start OpenC3 COSMOS
+   1. On Linux/Mac: `./openc3.sh run`
+   2. On Windows: `openc3.bat run`
+3. Build and load the plugin gem: `cd openc3-cosmos-seestar && ./reload.sh`
+   1. By default the plugin assumes the Seestar has an IP of 10.0.0.1 and uses TCP port 4700 for RPC commanding and responses. If your setup is different, edit the configuration in [openc3-cosmos-seestar/plugin.txt](./openc3-cosmos-seestar/plugin.txt) accordingly.
+4. After a minute or two, open a web browser to http://localhost:2900
+5. Connect to your Seestar by pressing the Connect button next to the interface name
 
-> [!IMPORTANT]
-> Before exposing COSMOS to the network please read the [Opening to the Network](./NetworkConfiguration.md) document.
->
+## Upgrade COSMOS Version
 
-## Run without the Demo project
-
-1. Edit .env and remove the OPENC3_DEMO line
-2. If you have already ran with the demo also uninstall the demo plugin from the Admin tool.
-
-## Upgrade to a Specific Version
-
-See [Upgrading](https://docs.openc3.com/docs/getting-started/upgrading) for more information.
-
-1. Stop OpenC3
-   - On Linux/Mac: `./openc3.sh stop`
-   - On Windows: `openc3.bat stop`
-2. Upgrade to the requested version
-   - On Linux/Mac: `./openc3.sh upgrade v6.9.2`
-   - On Windows: `openc3.bat upgrade v6.9.2`
+1. Stop OpenC3 (if running)
+   1. On Linux/Mac: `./openc3.sh stop`
+   2. On Windows: `openc3.bat stop`
+2. Edit [.env](./.env) and change OPENC3_TAG to the specific version you would like to run (ie. `OPENC3_TAG=6.4.1`)
 3. Start OpenC3
-   - On Linux/Mac: `./openc3.sh run`
-   - On Windows: `openc3.bat run`
+   1. On Linux/Mac: `./openc3.sh run`
+   2. On Windows: `openc3.bat run`
+
+NOTE: Downgrades are not necessarily supported. When upgrading COSMOS we need to upgrade databases and sometimes migrate internal data structures. While we perform a full regression test on every release, we recommend upgrading an individual machine with your specific plugins and do local testing before rolling out the upgrade to your production system.
 
 ## Change all default credentials and secrets
 
