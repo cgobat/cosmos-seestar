@@ -11,6 +11,9 @@ Gem::Specification.new do |s|
   s.authors = ['Caden Gobat']
   s.email = ['36030084+cgobat@users.noreply.github.com']
   s.homepage = 'https://github.com/cgobat/cosmos-seestar'
+  s.metadata = {
+      "github_repo" => "ssh://github.com/cgobat/cosmos-seestar"
+    }
   s.platform = Gem::Platform::RUBY
 
   if ENV['VERSION']
