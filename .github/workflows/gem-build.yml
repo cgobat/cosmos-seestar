@@ -1,11 +1,10 @@
-name: Build and Publish Ruby Gem
+name: Plugin Ruby Gem
 
 on:
   workflow_dispatch:
 
-
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,11 +17,16 @@ jobs:
           ruby-version: '3.0'
           bundler-cache: false
 
-      - name: Build with Rake
+      - name: Rake build
         run: |
           cd ${{ github.workspace }}/openc3-cosmos-seestar
           GEM_VERSION="0.0.0.$(date -u +%Y%m%d%H%M%S)"
           echo "GEM_VERSION=$GEM_VERSION" >> $GITHUB_ENV
           VERSION=$GEM_VERSION rake build
-          pwd
-          ls -l
+          echo "Built gem version $GEM_VERSION"
+          ls -l *.gem
+
+      - name: Publish gem
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gem push ${{ github.workspace }}/openc3-cosmos-seestar/openc3-cosmos-seestar-$GEM_VERSION.gem --host https://rubygems.pkg.github.com/${{ github.repository_owner }}
