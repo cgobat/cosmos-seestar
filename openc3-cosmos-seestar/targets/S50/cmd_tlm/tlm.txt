@@ -1,0 +1,128 @@
+TELEMETRY S50 PISTATUS_EVENT LITTLE_ENDIAN "PiStatus Event"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM EVENT 128 STRING "PiStatus" "Event name"
+    KEY $.Event
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM BOARD_TEMP 64 FLOAT "Board temperature"
+    KEY $.temp
+    UNITS "degrees Celsius" "degC"
+  APPEND_ITEM BATTERY_TEMP 64 FLOAT "Battery temperature"
+    KEY $.battery_temp
+    UNITS "degrees Celsius" "degC"
+  APPEND_ITEM BATTERY_CAPACITY 16 UINT "Battery remaining"
+    KEY $.battery_capacity
+    UNITS "percent" "%"
+
+TELEMETRY S50 VERSION_EVENT LITTLE_ENDIAN "Version Event"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM EVENT 128 STRING "Version" "Event name"
+    KEY $.Event
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM NAME 128 STRING "Software name"
+    KEY $.name
+  APPEND_ITEM FW_VERSION_INT 16 UINT "Integer firmware version"
+    KEY $.firmware_ver_int
+  APPEND_ITEM FW_VERSION_STR 32 STRING "String firmware version"
+    KEY $.firmware_ver_string
+  APPEND_ITEM IS_VERIFIED 64 STRING "Verification status"
+    KEY $.is_verified
+
+TELEMETRY S50 CLIENT_EVENT LITTLE_ENDIAN "Client Event"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM EVENT 128 STRING "Client" "Event name"
+    KEY $.Event
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM MASTER_CLIENT 256 STRING "Name of client that has command authority"
+    KEY $.connected[$.master_index]
+  APPEND_ITEM IS_MASTER 64 STRING "Does this client currently have command authority?"
+    KEY $.is_master
+
+TELEMETRY S50 CONNECTION_TEST_RESULT LITTLE_ENDIAN "Response to test_connection call"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM METHOD 128 STRING "test_connection" "Method name"
+    KEY $.method
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM RESULT 512 STRING "Test result"
+    KEY $.result
+  APPEND_ITEM CODE 16 UINT "Response code"
+    KEY $.code
+  APPEND_ITEM CMD_ID 16 UINT "Command ID that this is a response to"
+    KEY $.id
+
+TELEMETRY S50 DEVICE_STATE LITTLE_ENDIAN "Response to get_device_state call"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM METHOD 128 STRING "get_device_state" "Method name"
+    KEY $.method
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM NAME 128 STRING "Software name"
+    KEY $.result.device.name
+  APPEND_ITEM FW_VERSION_INT 16 UINT "Integer firmware version"
+    KEY $.result.device.firmware_ver_int
+  APPEND_ITEM FW_VERSION_STR 32 STRING "String firmware version"
+    KEY $.result.device.firmware_ver_string
+  APPEND_ITEM IS_VERIFIED 64 STRING "Verification status"
+    KEY $.result.device.is_verified
+  APPEND_ITEM SERIAL_NUMBER 128 STRING "Device serial number"
+    KEY $.result.device.sn
+  APPEND_ITEM CPU_ID 256 STRING "Device CPU identifier"
+    KEY $.result.device.cpuId
+  APPEND_ITEM PRODUCT_MODEL 256 STRING "Product model name"
+    KEY $.result.device.product_model
+  APPEND_ITEM FOCAL_LENGTH 32 FLOAT "Telescope focal length"
+    KEY $.result.device.focal_len
+    UNITS "millimeters" "mm"
+  APPEND_ITEM FOCAL_RATIO 32 FLOAT "Telescope focal ratio (f/ number)"
+    KEY $.result.device.fnumber
+  APPEND_ITEM HEATER_STATE 64 STRING "Heater status"
+    KEY $.result.setting.heater_enable
+    STATE ON True
+    STATE OFF False
+  APPEND_ITEM LONGITUDE 32 FLOAT "Location longitude"
+    KEY $.result.location_lon_lat[0]
+    UNITS "degrees" "deg"
+  APPEND_ITEM LATITUDE 32 FLOAT "Location latitude"
+    KEY $.result.location_lon_lat[1]
+    UNITS "degrees" "deg"
+  APPEND_ITEM FOCUSER_STATE 128 STRING "Current focuser activity state"
+    KEY $.result.focuser.state
+  APPEND_ITEM FOCUSER_POSITION 16 UINT "Current focuser position"
+    KEY $.result.focuser.step
+    UNITS "steps" "steps"
+  APPEND_ITEM FOCUSER_MAX 16 UINT "Maximum focuser position"
+    KEY $.result.focuser.max_step
+    UNITS "steps" "steps"
+  APPEND_ITEM STORAGE_NAME 128 STRING "Storage device name"
+    KEY $.result.storage.storage_volume[0].name
+  APPEND_ITEM STORAGE_DISK_SIZE 16 UINT "Disk size in MB"
+    KEY $.result.storage.storage_volume[0].disk_mb
+    UNITS "megabytes" "MB"
+  APPEND_ITEM STORAGE_DISK_FREE 16 UINT "Free disk space in MB"
+    KEY $.result.storage.storage_volume[0].free_mb
+    UNITS "megabytes" "MB"
+  APPEND_ITEM STORAGE_DISK_USAGE 8 UINT "Disk usage %"
+    KEY $.result.storage.storage_volume[0].used_percent
+    UNITS "percent" "%"
+  APPEND_ITEM STORAGE_CONNECTED 64 STRING "Is storage connected via USB?"
+    KEY $.result.storage.is_typec_connected
+  APPEND_ITEM LEVEL_ANGLE 32 FLOAT "Tilt angle off from level"
+    KEY $.result.balance_sensor.data.angle
+    UNITS "degrees" "deg"
+  APPEND_ITEM COMPASS_HEADING 32 FLOAT "Compass pointing direction"
+    KEY $.result.compass_sensor.data.direction
+    UNITS "degrees" "deg"
+  APPEND_ITEM BOARD_TEMP 32 FLOAT "Board temperature"
+    KEY $.result.pi_status.temp
+    UNITS "degrees Celsius" "degC"
+  APPEND_ITEM BATTERY_TEMP 32 FLOAT "Battery temperature"
+    KEY $.result.pi_status.battery_temp
+    UNITS "degrees Celsius" "degC"
+  APPEND_ITEM BATTERY_CAPACITY 8 UINT "Battery capacity"
+    KEY $.result.pi_status.battery_capacity
+    UNITS "percent" "%"
+  APPEND_ITEM CHARGE_STATE 256 STRING "Charging state"
+    KEY $.result.pi_status.charger_status

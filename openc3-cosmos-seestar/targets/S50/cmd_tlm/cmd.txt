@@ -1,0 +1,72 @@
+COMMAND S50 TEST_CONNECTION LITTLE_ENDIAN "Test connection"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "test_connection"}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "test_connection" "RPC method"
+    KEY $.method
+
+COMMAND S50 GET_DEVICE_STATE LITTLE_ENDIAN "Get device state"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "get_device_state"}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "get_device_state" "RPC method"
+    KEY $.method
+
+COMMAND S50 SET_LANGUAGE LITTLE_ENDIAN "Set device language"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"lang": "en"}}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "set_setting" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER LANGUAGE 128 STRING "en" "Language setting"
+    KEY $.params.lang
+    STATE "English" "en"
+
+COMMAND S50 SET_TIME LITTLE_ENDIAN "Set device time"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "pi_set_time", "params": [{"year": 2000, "mon": 1, "day": 1, "hour": 0, "min": 0, "sec": 0, "time_zone": "Etc/UTC"}]}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "pi_set_time" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER YEAR 16 UINT 1970 2170 2020 "Timestamp year"
+    KEY $.params[0].year
+  APPEND_PARAMETER MONTH 8 UINT 1 12 1 "Timestamp month"
+    KEY $.params[0].mon
+  APPEND_PARAMETER DAY 8 UINT 1 31 1 "Timestamp day"
+    KEY $.params[0].day
+  APPEND_PARAMETER HOUR 8 UINT 0 24 0 "Timestamp hour"
+    KEY $.params[0].hour
+  APPEND_PARAMETER MINUTE 8 UINT 0 60 0 "Timestamp minute"
+    KEY $.params[0].min
+  APPEND_PARAMETER SECOND 8 UINT 0 60 0 "Timestamp second"
+    KEY $.params[0].sec
+  APPEND_PARAMETER TIMEZONE 512 STRING "Etc/UTC" "Time zone"
+    KEY $.params[0].time_zone
+    STATE "UTC" "Etc/UTC"
+    STATE "Pacific" "America/Los Angeles"
+    STATE "Mountain" "America/Denver"
+    STATE "Central" "America/Chicago"
+    STATE "Eastern" "America/New York"
+
+COMMAND S50 ENABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": true, "value": 50}}}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "pi_output_set2" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER POWER 8 UINT 1 100 50 "Heater power"
+    KEY $.params.value
+    UNITS "percent" "%"
+
+COMMAND S50 DISABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": false, "value": 0}}}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "pi_output_set2" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER POWER 8 UINT 0 0 0 "Heater power"
+    KEY $.params.value
+    UNITS "percent" "%"
+
+COMMAND S50 FOCUSER_MOVE LITTLE_ENDIAN "Move focuser to a specified position"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "move_focuser", "params": {"step": 1700, "ret_step": true}}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "move_focuser" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER POSITION 16 UINT 1200 2400 0 "Focuser position"
+    KEY $.params.step
+    UNITS "steps" "steps"
