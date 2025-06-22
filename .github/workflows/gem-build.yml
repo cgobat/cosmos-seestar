@@ -23,6 +23,6 @@ jobs:
           cd ${{ github.workspace }}/openc3-cosmos-seestar
           GEM_VERSION="0.0.0.$(date -u +%Y%m%d%H%M%S)"
           echo "GEM_VERSION=$GEM_VERSION" >> $GITHUB_ENV
-          VERSION=$GEM_VERSION bundle exec rake build
+          VERSION=$GEM_VERSION rake build
           pwd
           ls -l
