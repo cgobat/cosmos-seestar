@@ -70,3 +70,17 @@ COMMAND SEESTAR FOCUSER_MOVE LITTLE_ENDIAN "Move focuser to a specified position
   APPEND_PARAMETER POSITION 16 UINT 1200 2400 0 "Focuser position"
     KEY $.params.step
     UNITS "steps" "steps"
+
+COMMAND SEESTAR SWITCH_MASTER_CLIENT LITTLE_ENDIAN "Take or relinquish control of the scope"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"master_cli": false}}'
+  APPEND_ID_PARAMETER ACTION 128 STRING "true" "Action to take"
+    KEY $.params.master_cli
+    STATE "TAKE CONTROL" true
+    STATE "RELEASE CONTROL" false
+
+COMMAND SEESTAR SET_CLIENT_NAME LITTLE_ENDIAN "Set client name"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"cli_name": "cosmos"}}'
+  APPEND_ID_PARAMETER NAME 128 STRING "COSMOS" "Name to set"
+    KEY $.params.cli_name
