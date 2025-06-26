@@ -1,8 +1,8 @@
 # Set VARIABLEs here to allow variation in your plugin
 
-VARIABLE s50_target_name S50
+VARIABLE s50_target_name SEESTAR
 
-TARGET S50 <%= s50_target_name %>
+TARGET SEESTAR <%= s50_target_name %>
 INTERFACE <%= s50_target_name %>_TCP_CLIENT openc3/interfaces/tcpip_client_interface.py 10.0.0.1 4700 4700 10.0 None
   DONT_CONNECT
   PROTOCOL READ_WRITE openc3/interfaces/protocols/terminated_protocol.py 0x0D0A 0x0D0A

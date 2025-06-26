@@ -1,4 +1,4 @@
-TELEMETRY S50 PISTATUS_EVENT LITTLE_ENDIAN "PiStatus Event"
+TELEMETRY SEESTAR PISTATUS_EVENT LITTLE_ENDIAN "PiStatus Event"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM EVENT 128 STRING "PiStatus" "Event name"
     KEY $.Event
@@ -14,7 +14,7 @@ TELEMETRY S50 PISTATUS_EVENT LITTLE_ENDIAN "PiStatus Event"
     KEY $.battery_capacity
     UNITS "percent" "%"
 
-TELEMETRY S50 VERSION_EVENT LITTLE_ENDIAN "Version Event"
+TELEMETRY SEESTAR VERSION_EVENT LITTLE_ENDIAN "Version Event"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM EVENT 128 STRING "Version" "Event name"
     KEY $.Event
@@ -29,7 +29,7 @@ TELEMETRY S50 VERSION_EVENT LITTLE_ENDIAN "Version Event"
   APPEND_ITEM IS_VERIFIED 64 STRING "Verification status"
     KEY $.is_verified
 
-TELEMETRY S50 CLIENT_EVENT LITTLE_ENDIAN "Client Event"
+TELEMETRY SEESTAR CLIENT_EVENT LITTLE_ENDIAN "Client Event"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM EVENT 128 STRING "Client" "Event name"
     KEY $.Event
@@ -40,7 +40,7 @@ TELEMETRY S50 CLIENT_EVENT LITTLE_ENDIAN "Client Event"
   APPEND_ITEM IS_MASTER 64 STRING "Does this client currently have command authority?"
     KEY $.is_master
 
-TELEMETRY S50 CONNECTION_TEST_RESULT LITTLE_ENDIAN "Response to test_connection call"
+TELEMETRY SEESTAR CONNECTION_TEST_RESULT LITTLE_ENDIAN "Response to test_connection call"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM METHOD 128 STRING "test_connection" "Method name"
     KEY $.method
@@ -53,7 +53,7 @@ TELEMETRY S50 CONNECTION_TEST_RESULT LITTLE_ENDIAN "Response to test_connection 
   APPEND_ITEM CMD_ID 16 UINT "Command ID that this is a response to"
     KEY $.id
 
-TELEMETRY S50 DEVICE_STATE LITTLE_ENDIAN "Response to get_device_state call"
+TELEMETRY SEESTAR DEVICE_STATE LITTLE_ENDIAN "Response to get_device_state call"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM METHOD 128 STRING "get_device_state" "Method name"
     KEY $.method
