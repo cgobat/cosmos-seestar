@@ -59,6 +59,20 @@ TELEMETRY SEESTAR SCOPETRACK_EVENT LITTLE_ENDIAN "ScopeTrack Event"
   APPEND_ITEM CODE 16 UINT "Event code"
     KEY $.code
 
+TELEMETRY SEESTAR WHEELMOVE_EVENT LITTLE_ENDIAN "WheelMove Event"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM EVENT 128 STRING "WheelMove" "Event name"
+    KEY $.Event
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM STATE 128 STRING "Wheel movement state"
+    KEY $.state
+  APPEND_ITEM POSITION 8 UINT "Active position"
+    KEY $.position
+    STATE DARK 0
+    STATE IRCUT 1
+    STATE LP 2
+
 TELEMETRY SEESTAR CONNECTION_TEST_RESULT LITTLE_ENDIAN "Response to test_connection call"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM METHOD 128 STRING "test_connection" "Method name"

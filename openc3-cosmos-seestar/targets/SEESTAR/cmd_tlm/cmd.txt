@@ -71,6 +71,17 @@ COMMAND SEESTAR FOCUSER_MOVE LITTLE_ENDIAN "Move focuser to a specified position
     KEY $.params.step
     UNITS "steps" "steps"
 
+COMMAND SEESTAR SET_FILTER LITTLE_ENDIAN "Move filter wheel to a specified position"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "set_wheel_position", "params": [0]}'
+  APPEND_ID_PARAMETER METHOD 160 STRING "set_wheel_position" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER POSITION 8 UINT 0 2 0 "Filter position"
+    KEY $.params[0]
+    STATE DARK 0
+    STATE IRCUT 1
+    STATE LP 2
+
 COMMAND SEESTAR SWITCH_MASTER_CLIENT LITTLE_ENDIAN "Take or relinquish control of the scope"
   ACCESSOR JsonAccessor
   TEMPLATE '{"id": 1, "method": "set_setting", "params": {"master_cli": false}}'
