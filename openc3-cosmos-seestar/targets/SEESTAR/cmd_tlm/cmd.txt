@@ -84,3 +84,10 @@ COMMAND SEESTAR SET_CLIENT_NAME LITTLE_ENDIAN "Set client name"
   TEMPLATE '{"id": 1, "method": "set_setting", "params": {"cli_name": "cosmos"}}'
   APPEND_ID_PARAMETER NAME 128 STRING "COSMOS" "Name to set"
     KEY $.params.cli_name
+
+COMMAND SEESTAR SYSTEM_SHUTDOWN LITTLE_ENDIAN "Shut down Seestar"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "pi_shutdown"}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "pi_shutdown" "RPC method"
+    KEY $.method
+  HAZARDOUS "Shutting down the Seestar will require physical access to turn back on"
