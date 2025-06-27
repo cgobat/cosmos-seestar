@@ -86,6 +86,22 @@ TELEMETRY SEESTAR CONNECTION_TEST_RESULT LITTLE_ENDIAN "Response to test_connect
   APPEND_ITEM CMD_ID 16 UINT "Command ID that this is a response to"
     KEY $.id
 
+TELEMETRY SEESTAR ISCOPE_APP_STATE LITTLE_ENDIAN "Response to iscope_get_app_state call"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM METHOD 128 STRING "iscope_get_app_state" "Method name"
+    KEY $.method
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM EXPOSURE_MS 32 FLOAT "Exposure time"
+    KEY $.result.Imaging.Exposure.exp_ms
+    UNITS "milliseconds" "ms"
+  APPEND_ITEM FRAMES_PER_SECOND 32 FLOAT "Number of frames taken per second"
+    KEY $.result.Imaging.fps
+  APPEND_ITEM CODE 16 UINT "Response code"
+    KEY $.code
+  APPEND_ITEM CMD_ID 16 UINT "Command ID that this is a response to"
+    KEY $.id
+
 TELEMETRY SEESTAR DEVICE_STATE LITTLE_ENDIAN "Response to get_device_state call"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM METHOD 128 STRING "get_device_state" "Method name"

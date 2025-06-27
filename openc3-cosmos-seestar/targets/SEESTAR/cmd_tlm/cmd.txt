@@ -10,6 +10,12 @@ COMMAND SEESTAR GET_DEVICE_STATE LITTLE_ENDIAN "Get device state"
   APPEND_ID_PARAMETER METHOD 128 STRING "get_device_state" "RPC method"
     KEY $.method
 
+COMMAND SEESTAR ISCOPE_GET_APP_STATE LITTLE_ENDIAN "Get app state"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "iscope_get_app_state"}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "iscope_get_app_state" "RPC method"
+    KEY $.method
+
 COMMAND SEESTAR SET_LANGUAGE LITTLE_ENDIAN "Set device language"
   ACCESSOR JsonAccessor
   TEMPLATE '{"id": 1, "method": "set_setting", "params": {"lang": "en"}}'
