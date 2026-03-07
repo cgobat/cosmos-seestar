@@ -4,6 +4,12 @@ COMMAND SEESTAR TEST_CONNECTION LITTLE_ENDIAN "Test connection"
   APPEND_ID_PARAMETER METHOD 128 STRING "test_connection" "RPC method"
     KEY $.method
 
+COMMAND SEESTAR GET_VERIFY_STR LITTLE_ENDIAN "Get verification string"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "get_verify_str"}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "get_verify_str" "RPC method"
+    KEY $.method
+
 COMMAND SEESTAR GET_DEVICE_STATE LITTLE_ENDIAN "Get device state"
   ACCESSOR JsonAccessor
   TEMPLATE '{"id": 1, "method": "get_device_state"}'
