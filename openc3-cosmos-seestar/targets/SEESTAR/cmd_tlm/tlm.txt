@@ -42,6 +42,27 @@ TELEMETRY SEESTAR CLIENT_EVENT LITTLE_ENDIAN "Client Event"
   APPEND_ARRAY_ITEM CLIENT_LIST 256 STRING 0 "List of connected client names"
     KEY $.connected
 
+TELEMETRY SEESTAR SCOPEGOTO_EVENT LITTLE_ENDIAN "ScopeGoto Event"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM EVENT 128 STRING "ScopeGoto" "Event name"
+    KEY $.Event
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM STATE 32 STRING "Scope goto state"
+    KEY $.state
+  APPEND_ITEM TIME_ELAPSED 32 UINT "Elapsed time"
+    KEY $.lapse_ms
+    UNITS "milliseconds" "ms"
+  APPEND_ITEM RA 32 FLOAT "Current right ascension"
+    KEY $.cur_ra_dec[0]
+    UNITS "degrees" "deg"
+  APPEND_ITEM DEC 32 FLOAT "Current declination"
+    KEY $.cur_ra_dec[1]
+    UNITS "degrees" "deg"
+  APPEND_ITEM DISTANCE 32 FLOAT "Angular distance to target"
+    KEY $.dist_deg
+    UNITS "degrees" "deg"
+
 TELEMETRY SEESTAR SCOPETRACK_EVENT LITTLE_ENDIAN "ScopeTrack Event"
   ACCESSOR JsonAccessor
   APPEND_ID_ITEM EVENT 128 STRING "ScopeTrack" "Event name"
@@ -94,6 +115,23 @@ TELEMETRY SEESTAR VERIFY_STR_RESULT LITTLE_ENDIAN "Response to get_verify_str ca
     KEY $.Timestamp
   APPEND_ITEM RESULT_STR 512 STRING "Test result"
     KEY $.result.str
+  APPEND_ITEM CODE 16 UINT "Response code"
+    KEY $.code
+  APPEND_ITEM CMD_ID 16 UINT "Command ID that this is a response to"
+    KEY $.id
+
+TELEMETRY SEESTAR SCOPE_EQ_COORDS LITTLE_ENDIAN "Response to scope_get_equ_coord call"
+  ACCESSOR JsonAccessor
+  APPEND_ID_ITEM METHOD 128 STRING "scope_get_equ_coord" "Method name"
+    KEY $.method
+  APPEND_ITEM TIMESTAMP 64 FLOAT "Time since boot"
+    KEY $.Timestamp
+  APPEND_ITEM RA 32 FLOAT "Right ascension"
+    KEY $.result.ra
+    UNITS "degrees" "deg"
+  APPEND_ITEM DEC 32 FLOAT "Declination"
+    KEY $.result.dec
+    UNITS "degrees" "deg"
   APPEND_ITEM CODE 16 UINT "Response code"
     KEY $.code
   APPEND_ITEM CMD_ID 16 UINT "Command ID that this is a response to"

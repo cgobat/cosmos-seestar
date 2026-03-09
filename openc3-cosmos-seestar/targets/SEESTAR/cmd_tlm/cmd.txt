@@ -22,6 +22,12 @@ COMMAND SEESTAR ISCOPE_GET_APP_STATE LITTLE_ENDIAN "Get app state"
   APPEND_ID_PARAMETER METHOD 128 STRING "iscope_get_app_state" "RPC method"
     KEY $.method
 
+COMMAND SEESTAR SCOPE_GET_EQ_COORDS LITTLE_ENDIAN "Get equatorial coordinates"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "scope_get_equ_coord", "params": ["verify"]}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "scope_get_equ_coord" "RPC method"
+    KEY $.method
+
 COMMAND SEESTAR SET_LANGUAGE LITTLE_ENDIAN "Set device language"
   ACCESSOR JsonAccessor
   TEMPLATE '{"id": 1, "method": "set_setting", "params": {"lang": "en", "verify": true}}'
