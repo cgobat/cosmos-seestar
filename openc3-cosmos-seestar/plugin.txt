@@ -8,6 +8,5 @@ INTERFACE <%= s50_target_name %>_TCP_CLIENT openc3/interfaces/tcpip_client_inter
   PROTOCOL READ_WRITE openc3/interfaces/protocols/terminated_protocol.py 0x0D0A 0x0D0A
   PROTOCOL READ_WRITE seestar_rpc_protocol.py
   MAP_TARGET <%= s50_target_name %>
-  OPTION CONNECT_CMD LOG "<%= s50_target_name %> GET_VERIFY_STR"
   OPTION PERIODIC_CMD DONT_LOG 5.0 "<%= s50_target_name %> TEST_CONNECTION"
   OPTION PERIODIC_CMD DONT_LOG 10.0 "<%= s50_target_name %> GET_DEVICE_STATE"

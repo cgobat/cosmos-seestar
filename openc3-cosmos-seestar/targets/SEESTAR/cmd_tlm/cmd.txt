@@ -1,6 +1,6 @@
 COMMAND SEESTAR TEST_CONNECTION LITTLE_ENDIAN "Test connection"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "test_connection"}'
+  TEMPLATE '{"id": 1, "method": "test_connection", "params": ["verify"]}'
   APPEND_ID_PARAMETER METHOD 128 STRING "test_connection" "RPC method"
     KEY $.method
 
@@ -12,19 +12,19 @@ COMMAND SEESTAR GET_VERIFY_STR LITTLE_ENDIAN "Get verification string"
 
 COMMAND SEESTAR GET_DEVICE_STATE LITTLE_ENDIAN "Get device state"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "get_device_state"}'
+  TEMPLATE '{"id": 1, "method": "get_device_state", "params": ["verify"]}'
   APPEND_ID_PARAMETER METHOD 128 STRING "get_device_state" "RPC method"
     KEY $.method
 
 COMMAND SEESTAR ISCOPE_GET_APP_STATE LITTLE_ENDIAN "Get app state"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "iscope_get_app_state"}'
+  TEMPLATE '{"id": 1, "method": "iscope_get_app_state", "params": ["verify"]}'
   APPEND_ID_PARAMETER METHOD 128 STRING "iscope_get_app_state" "RPC method"
     KEY $.method
 
 COMMAND SEESTAR SET_LANGUAGE LITTLE_ENDIAN "Set device language"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"lang": "en"}}'
+  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"lang": "en", "verify": true}}'
   APPEND_ID_PARAMETER METHOD 128 STRING "set_setting" "RPC method"
     KEY $.method
   APPEND_PARAMETER LANGUAGE 128 STRING "en" "Language setting"
@@ -33,7 +33,7 @@ COMMAND SEESTAR SET_LANGUAGE LITTLE_ENDIAN "Set device language"
 
 COMMAND SEESTAR SET_TIME LITTLE_ENDIAN "Set device time"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "pi_set_time", "params": [{"year": 2000, "mon": 1, "day": 1, "hour": 0, "min": 0, "sec": 0, "time_zone": "Etc/UTC"}]}'
+  TEMPLATE '{"id": 1, "method": "pi_set_time", "params": [{"year": 2000, "mon": 1, "day": 1, "hour": 0, "min": 0, "sec": 0, "time_zone": "Etc/UTC"}, "verify"]}'
   APPEND_ID_PARAMETER METHOD 128 STRING "pi_set_time" "RPC method"
     KEY $.method
   APPEND_PARAMETER YEAR 16 UINT 1970 2170 2020 "Timestamp year"
@@ -58,7 +58,7 @@ COMMAND SEESTAR SET_TIME LITTLE_ENDIAN "Set device time"
 
 COMMAND SEESTAR ENABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": true, "value": 50}}}'
+  TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": true, "value": 50}, "verify": true}}'
   APPEND_ID_PARAMETER METHOD 128 STRING "pi_output_set2" "RPC method"
     KEY $.method
   APPEND_PARAMETER POWER 8 UINT 1 100 50 "Heater power"
@@ -67,7 +67,7 @@ COMMAND SEESTAR ENABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
 
 COMMAND SEESTAR DISABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": false, "value": 0}}}'
+  TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": false, "value": 0}, "verify": true}}'
   APPEND_ID_PARAMETER METHOD 128 STRING "pi_output_set2" "RPC method"
     KEY $.method
   APPEND_PARAMETER POWER 8 UINT 0 0 0 "Heater power"
@@ -76,7 +76,7 @@ COMMAND SEESTAR DISABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
 
 COMMAND SEESTAR FOCUSER_MOVE LITTLE_ENDIAN "Move focuser to a specified position"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "move_focuser", "params": {"step": 1700, "ret_step": true}}'
+  TEMPLATE '{"id": 1, "method": "move_focuser", "params": {"step": 1700, "ret_step": true, "verify": true}}'
   APPEND_ID_PARAMETER METHOD 128 STRING "move_focuser" "RPC method"
     KEY $.method
   APPEND_PARAMETER POSITION 16 UINT 1200 2400 0 "Focuser position"
@@ -85,7 +85,7 @@ COMMAND SEESTAR FOCUSER_MOVE LITTLE_ENDIAN "Move focuser to a specified position
 
 COMMAND SEESTAR SET_FILTER LITTLE_ENDIAN "Move filter wheel to a specified position"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "set_wheel_position", "params": [0]}'
+  TEMPLATE '{"id": 1, "method": "set_wheel_position", "params": [0, "verify"]}'
   APPEND_ID_PARAMETER METHOD 160 STRING "set_wheel_position" "RPC method"
     KEY $.method
   APPEND_PARAMETER POSITION 8 UINT 0 2 0 "Filter position"
@@ -96,7 +96,7 @@ COMMAND SEESTAR SET_FILTER LITTLE_ENDIAN "Move filter wheel to a specified posit
 
 COMMAND SEESTAR SWITCH_MASTER_CLIENT LITTLE_ENDIAN "Take or relinquish control of the scope"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"master_cli": false}}'
+  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"master_cli": false, "verify": true}}'
   APPEND_ID_PARAMETER ACTION 128 STRING "true" "Action to take"
     KEY $.params.master_cli
     STATE "TAKE CONTROL" true
@@ -104,13 +104,13 @@ COMMAND SEESTAR SWITCH_MASTER_CLIENT LITTLE_ENDIAN "Take or relinquish control o
 
 COMMAND SEESTAR SET_CLIENT_NAME LITTLE_ENDIAN "Set client name"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"cli_name": "cosmos"}}'
+  TEMPLATE '{"id": 1, "method": "set_setting", "params": {"cli_name": "cosmos", "verify": true}}'
   APPEND_ID_PARAMETER NAME 128 STRING "COSMOS" "Name to set"
     KEY $.params.cli_name
 
 COMMAND SEESTAR SYSTEM_SHUTDOWN LITTLE_ENDIAN "Shut down Seestar"
   ACCESSOR JsonAccessor
-  TEMPLATE '{"id": 1, "method": "pi_shutdown"}'
+  TEMPLATE '{"id": 1, "method": "pi_shutdown", "params": ["verify"]}'
   APPEND_ID_PARAMETER METHOD 128 STRING "pi_shutdown" "RPC method"
     KEY $.method
   HAZARDOUS "Shutting down the Seestar will require physical access to turn back on"
