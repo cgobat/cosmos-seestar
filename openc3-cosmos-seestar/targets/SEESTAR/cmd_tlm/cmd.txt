@@ -37,6 +37,20 @@ COMMAND SEESTAR SET_LANGUAGE LITTLE_ENDIAN "Set device language"
     KEY $.params.lang
     STATE "English" "en"
 
+COMMAND SEESTAR SET_LOCATION LITTLE_ENDIAN "Set user location"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "set_user_location", "params": {"force": false, "lat": 0, "lon": 0, "verify": true}}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "set_user_location" "RPC method"
+    KEY $.method
+  APPEND_PARAMETER FORCE 8 BOOL false "Force location"
+    KEY $.params.force
+  APPEND_PARAMETER LATITUDE 32 FLOAT -90 90 0 "Latitude"
+    KEY $.params.lat
+    UNITS "degrees" "deg"
+  APPEND_PARAMETER LONGITUDE 32 FLOAT -180 180 0 "Longitude"
+    KEY $.params.lon
+    UNITS "degrees" "deg"
+
 COMMAND SEESTAR SET_TIME LITTLE_ENDIAN "Set device time"
   ACCESSOR JsonAccessor
   TEMPLATE '{"id": 1, "method": "pi_set_time", "params": [{"year": 2000, "mon": 1, "day": 1, "hour": 0, "min": 0, "sec": 0, "time_zone": "Etc/UTC"}, "verify"]}'
