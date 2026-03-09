@@ -51,7 +51,7 @@ COMMAND SEESTAR SET_TIME LITTLE_ENDIAN "Set device time"
   APPEND_PARAMETER TIMEZONE 512 STRING "Etc/UTC" "Time zone"
     KEY $.params[0].time_zone
     STATE "UTC" "Etc/UTC"
-    STATE "Pacific" "America/Los Angeles"
+    STATE "Pacific" "America/Los_Angeles"
     STATE "Mountain" "America/Denver"
     STATE "Central" "America/Chicago"
     STATE "Eastern" "America/New York"
