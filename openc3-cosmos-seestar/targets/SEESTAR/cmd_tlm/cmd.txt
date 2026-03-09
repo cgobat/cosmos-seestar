@@ -62,6 +62,19 @@ COMMAND SEESTAR SET_TIME LITTLE_ENDIAN "Set device time"
     STATE "Central" "America/Chicago"
     STATE "Eastern" "America/New York"
 
+COMMAND SEESTAR RAISE_ARM LITTLE_ENDIAN "Raise arm (unpark scope)"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "scope_move_to_horizon", "params": ["verify"]}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "scope_move_to_horizon" "RPC method"
+    KEY $.method
+
+COMMAND SEESTAR LOWER_ARM LITTLE_ENDIAN "Lower arm (park scope)"
+  ACCESSOR JsonAccessor
+  TEMPLATE '{"id": 1, "method": "scope_park", "params": ["verify"]}'
+  APPEND_ID_PARAMETER METHOD 128 STRING "scope_park" "RPC method"
+    KEY $.method
+  HAZARDOUS "This will lower the telescope arm. Ensure nothing (e.g. dew shield) is in the way."
+
 COMMAND SEESTAR ENABLE_HEATER LITTLE_ENDIAN "Enable anti-dew heater"
   ACCESSOR JsonAccessor
   TEMPLATE '{"id": 1, "method": "pi_output_set2", "params": {"heater": {"state": true, "value": 50}, "verify": true}}'
